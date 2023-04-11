@@ -58,7 +58,7 @@
 
             // grab the name from your array at index 2
             // \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-            // NAME IS A STRING @ INDEX [1]
+            // NAME IS A STRING @ INDEX [2]
             var name = cells[2];
             // COMPLETED - Your going to need to parse your string as a `double`
             // COMPLETED - which is similar to parsing a string as an `int`

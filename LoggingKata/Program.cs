@@ -7,40 +7,37 @@ namespace LoggingKata
 {
     class Program
     {
-        static readonly ILog logger = new TacoLogger();                         //this will allow us to LOG or call LOGGER METHODS ie. logger.LogWarning or (line 18)...
+        //this is  a program that is given multiple tocoBell locatins identified
+        //by it LONGITUDE and LATITUDE in a .CSV file.
+        //with this information the program will determine the fartest distance
+        //between two taco bells.
+        //TO PERFORM THIS WE WILL USE TWO NESTED FOR LOOPS 
+        static readonly ILog logger = new TacoLogger();
+        //LINE ABOVE: will allow us to LOG or call LOGGER METHODS ie.
+        //logger.LogWarning...
         const string csvPath = "TacoBell-US-AL.csv";
-
         static void Main(string[] args)
         {
-            // TODO:  Find the two Taco Bells that are the furthest from one
-            // another.
-            // HINT:  You'll need two nested forloops ---------------------------
-
             logger.LogInfo("Log initialized.....");
-
             // COMPLETED - use File.ReadAllLines(path) to grab all the lines
             // from your csv file
             // COMPLETED - Log and error if you get 0 lines and a warning if
             // you get 1 line
-            string[] lines = File.ReadAllLines(csvPath);                        //Grabs each lines from csv file and turns them into a collection of strings 
+            string[] lines = File.ReadAllLines(csvPath);
+            //LINE ABOVE: "FILE.READALLLINES(CSVPATH)" using the FILE CLASS to
+            //readalllines" or Grabs each lines from
+            //CSV FILE and turns them into a COLLECTION OF STRINGS. 
             if(lines.Length == 0)
             {
                 logger.LogError("file has no input");
             }
-
             if(lines.Length == 1)
             {
                 logger.LogInfo($"file only has one line of input");
             }
-
             logger.LogInfo($"Lines: {lines[0]}");
-
-
-            
-
             // Create a new instance of your TacoParser class
             var parser = new TacoParser();                                      //this is a new INSTANCE of TacoParser class
-
             // Grab an IEnumerable of locations using the Select command:
             // var locations = lines.Select(parser.Parse);
             // \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
@@ -50,11 +47,8 @@ namespace LoggingKata
             //               'Locations'^
             // SINCE PARSE IS AN ITRACKABLE WE WILL STORE IT INTO A COLLECTION OF ITRACKABLES OR TACO BELLS
             // /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
-
             // DON'T FORGET TO LOG YOUR STEPS
-
             // Now that your Parse method is completed, START BELOW ----------
-
             // COMPLETED - TODO: Create two `ITrackable` variables with initial values of
             // COMPLETED - `null`. These will be used to store your two taco bells that are
             // COMPLETED - the farthest from each other.
@@ -62,19 +56,14 @@ namespace LoggingKata
             ITrackable tacoBell1 = null;
             ITrackable tacoBell2 = null;
             double distance = 0;
-
             // DONE Include the Geolocation toolbox, so you can compare
             // locations: `using GeoCoordinatePortable;`
-
             //HINT NESTED LOOPS SECTION---------------------
             for (int i = 0; i < locations.Length; i++)
             {
                 // Do a loop for your locations to grab each location as the
-                // origin (perhaps: `locA`)
-                
+                // origin (perhaps: `locA`)              
                 var runLocalA = locations[i];
-
-
                 // Create a new corA Coordinate with your locA's lat and long
                 var corA = new GeoCoordinate();
                 corA.Latitude = runLocalA.Location.Latitude;
@@ -86,15 +75,12 @@ namespace LoggingKata
                 for (int j = 0; j < locations.Length; j++)                      //use j because i used in initial for loop (line 70) 
                 {
                     // Create a new Coordinate with your locB's lat and long
-
                     var runLocalB = locations[j];
                     var corB = new GeoCoordinate();
                     corB.Latitude = runLocalB.Location.Latitude;
                     corB.Longitude = runLocalB.Location.Longitude;
-
                     // Now, compare the two using `.GetDistanceTo()`, which returns
                     // a double
-
                     // If the distance is greater than the currently saved distance,
                     // update the distance and the two `ITrackable` variables you
                     // set above
@@ -105,16 +91,10 @@ namespace LoggingKata
                         tacoBell2 = runLocalB;
                     }
                 }
-
-
             }
-
-
             // Once you've looped through everything, you've found the two Taco
             // Bells farthest away from each other.
-
             logger.LogInfo($"{tacoBell1.Name} and {tacoBell2.Name} are the farthest apart");
-
         }
     }
 }
