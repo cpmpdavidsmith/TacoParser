@@ -7,27 +7,28 @@ namespace LoggingKata
 {
     class Program
     {
-        //this is  a program that is given multiple tocoBell locatins identified
+        //this is a project that is given multiple tocoBell locatins identified
         //by it LONGITUDE and LATITUDE in a .CSV file.
         //with this information the program will determine the fartest distance
         //between two taco bells.
-        //TO PERFORM THIS WE WILL USE TWO NESTED FOR LOOPS 
-        static readonly ILog logger = new TacoLogger();
-        //LINE ABOVE: will allow us to LOG or call LOGGER METHODS ie.
-        //logger.LogWarning...
-        const string csvPath = "TacoBell-US-AL.csv";
-        static void Main(string[] args)
-        {
-            logger.LogInfo("Log initialized.....");
-            // COMPLETED - use File.ReadAllLines(path) to grab all the lines
-            // from your csv file
-            // COMPLETED - Log and error if you get 0 lines and a warning if
-            // you get 1 line
-            string[] lines = File.ReadAllLines(csvPath);
-            //LINE ABOVE: "FILE.READALLLINES(CSVPATH)" using the FILE CLASS to
-            //readalllines" or Grabs each lines from
-            //CSV FILE and turns them into a COLLECTION OF STRINGS. 
-            if(lines.Length == 0)
+        //TO PERFORM THIS WE WILL USE TWO NESTED FOR LOOPS with an IF STATEMENT
+        //WHICH STOPS THE LOOP WHEN THE FARTEST DISTANCE IS IDENTEFIED. 
+        static readonly ILog logger = new TacoLogger();                       //*0
+        //thhis instance of the taco logger will allow us to LOG or call
+        //LOGGER METHODS like a Warning...                                      *0
+        //WE THEN SET THE CSV FILE AS A CONSTANT 
+        const string csvPath = "TacoBell-US-AL.csv";                          //*0
+        //THEN WE BEGIN IN THE MAIN 
+        static void Main(string[] args)                                       //*0
+        {                                                                     //*0
+            logger.LogInfo("Log initialized.....");                           //*0                                                 
+            string[] lines = File.ReadAllLines(csvPath);                      //*1
+            //LINE ABOVE: "FILE.READALLLINES(CSVPATH)" using the FILE CLASS to  *1
+            //readalllines" or Grabs each lines from                            *1
+            //CSV FILE and turns them into a COLLECTION OF STRINGS.             *1
+            //AND Log an error if you get 0 lines and a warning if              
+            // you get 1 line 
+            if (lines.Length == 0)
             {
                 logger.LogError("file has no input");
             }
@@ -37,28 +38,31 @@ namespace LoggingKata
             }
             logger.LogInfo($"Lines: {lines[0]}");
             // Create a new instance of your TacoParser class
-            var parser = new TacoParser();                                      //this is a new INSTANCE of TacoParser class
-            // Grab an IEnumerable of locations using the Select command:
-            // var locations = lines.Select(parser.Parse);
-            // \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-            var locations = lines.Select(line => parser.Parse(line)).ToArray(); //This is where we call the PARSE METHOD using LINQ
-            //               ^for each 'line' in 'linse' we are going to parse
-            //               that line into an ARRAY and store it into file
-            //               'Locations'^
-            // SINCE PARSE IS AN ITRACKABLE WE WILL STORE IT INTO A COLLECTION OF ITRACKABLES OR TACO BELLS
-            // /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
-            // DON'T FORGET TO LOG YOUR STEPS
-            // Now that your Parse method is completed, START BELOW ----------
-            // COMPLETED - TODO: Create two `ITrackable` variables with initial values of
-            // COMPLETED - `null`. These will be used to store your two taco bells that are
-            // COMPLETED - the farthest from each other.
-            // COMPLETED - Create a `double` variable to store the distance
+            var parser = new TacoParser();
+            //ABOVE: is a new INSTANCE of TacoParser class
+
+            // Grab an IEnumerable of locations using the Select command:       *3
+            //This is where we call the PARSE METHOD using LINQ                 *3
+            // \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/*3
+            var locations = lines.Select(line => parser.Parse(line)).ToArray(); 
+            //               ^for each 'line' in 'lineS' we are going to parse  *3
+            //               that line into an ARRAY and store it into file     *3
+            //               'Locations'^                                       *3
+            // SINCE PARSE IS AN ITRACKABLE WE WILL STORE IT INTO A COLLECTION  *3
+            // OF ITRACKABLES OR TACO BELLS                                     *3
+            // /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\*3
+       
+            // Now that your Parse method is completed, START BELOW ----------  *3
+            
+            //After creating strings we will create `ITRACKABLE` VARIABLES with *2
+            //INITIAL VALUES of NULL for 2 LOCATIONS and 1 DOUBLE VARIABLE for  *2
+            //DISTANCE                                                          *2
             ITrackable tacoBell1 = null;
             ITrackable tacoBell2 = null;
             double distance = 0;
-            // DONE Include the Geolocation toolbox, so you can compare
-            // locations: `using GeoCoordinatePortable;`
-            //HINT NESTED LOOPS SECTION---------------------
+            //AND GEO CORDINATES are used to get the DISTANCE betwEen LOCATIONS *2
+           
+            //NESTED LOOPS SECTION---------------------
             for (int i = 0; i < locations.Length; i++)
             {
                 // Do a loop for your locations to grab each location as the
@@ -66,6 +70,7 @@ namespace LoggingKata
                 var runLocalA = locations[i];
                 // Create a new corA Coordinate with your locA's lat and long
                 var corA = new GeoCoordinate();
+
                 corA.Latitude = runLocalA.Location.Latitude;
                 corA.Longitude = runLocalA.Location.Longitude;
                 // /\ /\ /\ /\GONNA USE THIS TO COMPARE TO OTHER LOCATIONS/\ /\ 

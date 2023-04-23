@@ -14,7 +14,7 @@
             //---------------------       THEN      -------------------------        ANYTHING THAT 'CONFORMS' TO ITRACKABLE
 
 
-            //  \/\/\/\/\/  LOGGER TAKES "STRING" AND LOGGS IT   \/\/\/\/\/\/
+            //  \/\/\/\/\/  LOGGER TAKES "STRING" AND LOGS IT   \/\/\/\/\/\/
             logger.LogInfo("Begin parsing");
             //  -------------------       THEN      -------------------------
 
@@ -35,7 +35,7 @@
                 logger.LogWarning("LESS THAN 3 ITEMS IN THIS LINE..." +
                                     "MISSING NECESSARY INFORMATION");
                 // Do not fail if one record parsing fails, return null
-                return null; // TODO Implement
+                return null; // 
             }
             //--------------------      THEN        --------------------------
 
@@ -60,14 +60,11 @@
             // \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
             // NAME IS A STRING @ INDEX [2]
             var name = cells[2];
-            // COMPLETED - Your going to need to parse your string as a `double`
-            // COMPLETED - which is similar to parsing a string as an `int`
             // /\ /\ /\         STORE IN FILE "NAME"              /\ /\ /\ /\
             //--------------------      THEN        --------------------------
 
 
-            // COMPLETED - You'll need to create a TacoBell class
-            // COMPLETED - that conforms to ITrackable
+            // You'll need to create a TacoBell class
             //--------------------      THEN        --------------------------
 
 
@@ -82,9 +79,9 @@
             var point = new Point();//<- THIS IS AN INSTANCE OF LOCATION PROPERTY TYPE POINT
             point.Latitude = latitude;
             point.Longitude = longitude;
-            // [(LINES; 83+84) PUT IN POINT @ (LINE 82)] 
-            // /\ /\ /\ TOOK ALL THIS /\ /\ /\
-            //THEN STROREDS IT IN LOCATON \/ \/ \/  (LINE 89)
+            // /\ /\ /\HOLDING LOGITUDE AND LATITUDE /\ /\ /\  
+       
+            //THEN STORE IT IN LOCATON TACOBELL WITH ITS NAME  \/ \/ \/ 
             var tacoBell = new TacoBell();
             tacoBell.Name = name;
             tacoBell.Location = point;
